@@ -25,6 +25,16 @@ pipeline {
             }
         }
 
+        stage("Stop previous Angular"){
+            steps{
+                sh'''
+                echo "Parando continaer que usam porta 4200..."
+                docker ps -q --filter "publish=4200" | xargs -r docker stop
+                docker ps -aq --filter "publish=4200" | xargs -r docker rm
+                '''
+            }
+        }
+
         stage("Build Angular DEV"){
             steps{
                 sh'''
