@@ -50,7 +50,7 @@ pipeline {
             steps{
                 sh'''
                 echo "Testando Angular DEV..."
-                curl -f hhtp://localhost:4200 || exit 1
+                curl -f http://localhost:4200 || exit 1
                 '''
             }
         }
