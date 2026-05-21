@@ -50,13 +50,10 @@ pipeline {
             steps{
                 sh'''
                 echo "Aguardando Angular subir..."
+                sleep 50
                 
-                for i in {1..10}; do
-                    curl -f http://angular-dev:4200 && break || sleep 5
-                done
-
                 echo "Testando Angular DEV..."
-                curl -f http://angular-dev:4200
+                curl -f http://angular-dev:4200 || exit 1
                 '''
             }
         }
