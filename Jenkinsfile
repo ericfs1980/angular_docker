@@ -52,11 +52,11 @@ pipeline {
                 echo "Aguardando Angular subir..."
                 
                 for i in {1..10}; do
-                    curl -f http://localhost:4200 && break || sleep 5
+                    curl -f http://angular-dev:4200 && break || sleep 5
                 done
 
                 echo "Testando Angular DEV..."
-                curl -f http://localhost:4200
+                curl -f http://angular-dev:4200
                 '''
             }
         }
