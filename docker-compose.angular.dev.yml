@@ -1,0 +1,23 @@
+services:
+  angular-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    
+    container_name: angular-dev
+
+    ports:
+      - "4200:4200"
+
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+    command: npm start
+
+    networks: 
+      - app-network
+
+networks:
+  app-network:
+    external: true
