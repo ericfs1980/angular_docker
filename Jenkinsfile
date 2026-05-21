@@ -1,0 +1,74 @@
+pipeline {
+
+    agent any
+
+    environment {
+        COMPOSE_DEV = "docker-compose -f docker-compose.angular.dev.yml"
+        COMPOSE_PROD = "docker-compose -f docker-compose.angular.prod.yml"
+    }
+
+    options {
+        skipDefaultCheckout(true)
+    }
+
+    stages {
+
+        stage("Clean Workspace"){
+            steps{
+                deleteDir()
+            }
+        }
+
+        stage("Checkout SCM"){
+            steps{
+                checkout scm
+            }
+        }
+
+        stage("Build Angular DEV"){
+            steps{
+                sh'''
+                echo "Subindo Angular DEV..."
+                ${COMPOSE_DEV} down || true
+                ${COMPOSE_DEV} up -d --build
+                '''
+            }
+        }
+
+        stage("Test Angular DEV"){
+            steps{
+                sh'''
+                echo "Testando Angular DEV..."
+                curl -f hhtp://localhost:4200 || exit 1
+                '''
+            }
+        }
+
+        stage("Aprovação PROD"){
+            steps{
+                input message: 'Deseja promover Angular para PROD?'
+            }
+        }
+
+        stage("Deploy Angular PROD"){
+            steps{
+                sh'''
+                echo "Subindo Angular PROD..."
+                ${COMPOSE_PROD} down || true
+                ${COMPOSE_PROD} up -d --build
+                '''
+            }
+        }
+    }
+
+    post{
+        
+        success {
+            echo '✅ Frontend deployado com sucesso!'
+        }
+        failure {
+            echo '❌ Falha no pipeline do frontend!'
+        }
+    }
+
+}
