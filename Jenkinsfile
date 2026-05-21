@@ -49,8 +49,14 @@ pipeline {
         stage("Test Angular DEV"){
             steps{
                 sh'''
+                echo "Aguardando Angular subir..."
+                
+                for i in {1..10}; do
+                    curl -f http://localhost:4200 && break || sleep 5
+                done
+
                 echo "Testando Angular DEV..."
-                curl -f http://localhost:4200 || exit 1
+                curl -f http://localhost:4200
                 '''
             }
         }
