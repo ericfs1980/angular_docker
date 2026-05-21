@@ -30,6 +30,7 @@ pipeline {
                 sh'''
                 echo "Subindo Angular DEV..."
                 ${COMPOSE_DEV} down || true
+                docker system prune -f || true
                 ${COMPOSE_DEV} up -d --build --remove-orphans
                 '''
             }
