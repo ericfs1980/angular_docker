@@ -30,7 +30,7 @@ pipeline {
                 sh'''
                 echo "Subindo Angular DEV..."
                 ${COMPOSE_DEV} down || true
-                ${COMPOSE_DEV} up -d --build
+                ${COMPOSE_DEV} up -d --build --remove-orphans
                 '''
             }
         }
