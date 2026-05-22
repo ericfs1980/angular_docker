@@ -53,7 +53,7 @@ pipeline {
                 sleep 50
                 
                 echo "Testando Angular DEV..."
-                curl -f http://jenkins_mysql-mysql-prod-1:4200 || exit 1
+                curl -f http://frontend-angular-docker:4200 || exit 1
                 '''
             }
         }
