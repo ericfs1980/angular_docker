@@ -50,10 +50,11 @@ pipeline {
             steps{
                 sh'''
                 echo "Aguardando Angular subir..."
-                sleep 50
-                
-                echo "Testando Angular DEV..."
-                curl -f http://frontend-angular-docker:4200 || exit 1
+                for i in {1..10}; do
+                    curl -f http://localhost:4200 && break
+                    echo "Tentando novamente..."
+                    sleep 10
+                done    
                 '''
             }
         }
