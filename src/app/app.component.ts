@@ -9,5 +9,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'app-frontend Hot Reload - Jenkins';
+  title = 'app-frontend Hot Reload - Jenkins NEW 2026';
 }
