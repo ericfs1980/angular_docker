@@ -48,21 +48,24 @@ pipeline {
 
         stage("Test Angular DEV"){
             steps{
-                sh'''
-                echo "Aguardando Angular subir..."
+                
+            sh """
+            echo "Aguardando Angular subir..."
 
-                for i in {1..12}; do
+            for i in 1 2 3 4 5 6 7 8 9 10 11 12; do
                 if curl -f http://angular-dev:4200; then
-                    echo "Angular está online!"
+                    echo "Angular esta online!"
                     exit 0
                 fi
+
                 echo "Ainda nao subiu, tentando novamente..."
                 sleep 10
-                done
+            done
 
-                echo "Angular nao respondeu"
-                exit 1
-                '''
+            echo "Angular nao respondeu"
+            exit 1
+            """
+
             }
         }
 
