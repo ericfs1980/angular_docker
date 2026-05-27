@@ -1,0 +1,10 @@
+services:
+  angular-prod:
+    container_name: angular-prod
+
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+
+    ports:
+      - "8080:4200"
