@@ -10,8 +10,11 @@ services:
     command: npm start
 
     networks: 
-      - app-network
+      app-network:
+        aliases:
+          - angular-dev
 
 networks:
   app-network:
     external: true
+    name: app-network
