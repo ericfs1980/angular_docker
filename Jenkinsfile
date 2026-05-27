@@ -50,17 +50,18 @@ pipeline {
             steps{
                 sh'''
                 echo "Aguardando Angular subir..."
-                for i in {1..20}; do
-                    if curl -f http://localhost:4200; then
-                        echo "✅ Angular online"
-                        exit 0
-                    fi
-                    echo "⏳ Ainda não subiu, tentando novamente..."
-                    sleep 10
+
+                for i in {1..12}; do
+                if curl -f http://angular-dev:4200; then
+                    echo "Angular está online!"
+                    exit 0
+                fi
+                echo "Ainda nao subiu, tentando novamente..."
+                sleep 10
                 done
 
-                echo "❌ Angular não respondeu a tempo
-                exit 1    
+                echo "Angular nao respondeu"
+                exit 1
                 '''
             }
         }
