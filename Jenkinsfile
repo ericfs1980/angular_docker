@@ -52,13 +52,13 @@ pipeline {
             sh """
             echo "Aguardando Angular subir..."
 
-            for i in 1 2 3 4 5 6 7 8 9 10 11 12; do
-                if curl -f http://angular-dev:4200; then
+            for i in \$(seq 1 12); do
+                if curl -sf http://angular-dev:4200 > /dev/null; then
                     echo "Angular esta online!"
                     exit 0
                 fi
 
-                echo "Ainda nao subiu, tentando novamente..."
+                echo "Tentativa \$i: ainda nao subiu..."
                 sleep 10
             done
 
