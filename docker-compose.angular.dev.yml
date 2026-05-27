@@ -1,5 +1,6 @@
 services:
   angular-dev:
+    container_name: angular-dev
     build:
       context: .
       dockerfile: Dockerfile.dev
